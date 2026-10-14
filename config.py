@@ -16,10 +16,10 @@ BOT_TOKEN = getenv("BOT_TOKEN", "")
 # Get from MongoDB Atlas
 MONGO_DB_URI = getenv("MONGO_DB_URI", "")
 
-DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", "60"))
+DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", "999"))
 
 LOGGER_ID = int(getenv("LOGGER_ID", "0"))
-OWNER_ID = int(getenv("OWNER_ID", "7574330905"))
+OWNER_ID = int(getenv("OWNER_ID", "0"))
 
 # Heroku App Name
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME", "")
@@ -29,23 +29,30 @@ HEROKU_API_KEY = getenv("HEROKU_API_KEY", "")
 
 UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
-    "https://github.com/NoxxOP/ShrutixMusic",
+    "https://t.me/AstraVerse0",
 )
 
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "main")
 
 GIT_TOKEN = getenv("GIT_TOKEN")
 
-# Get API Key from @SHRUTIAPIBOT
+# ------------------- Multiple Shruti APIs -------------------
+# Comma-separated URLs and keys (order matters — URL[0] pairs with KEY[0])
+SHRUTI_API_URLS = getenv("SHRUTI_API_URLS", "")
+SHRUTI_API_KEYS = getenv("SHRUTI_API_KEYS", "")
+
+# Legacy single-API fallback (agar upar wale khali hon)
+SHRUTI_API_URL = getenv("SHRUTI_API_URL", "https://api.shrutibots.site")
+SHRUTI_API_KEY = getenv("SHRUTI_API_KEY", "")
 
 SUPPORT_CHANNEL = getenv(
     "SUPPORT_CHANNEL",
-    "https://t.me/ShrutiBots"
+    "https://t.me/YuniteCrew"
 )
 
 SUPPORT_CHAT = getenv(
     "SUPPORT_CHAT",
-    "https://t.me/ShrutiSupportChat"
+    "https://t.me/+A3bmzLTMu5sxMWVh"
 )
 
 AUTO_LEAVING_ASSISTANT = getenv(
@@ -85,12 +92,12 @@ confirmer = {}
 
 START_IMG_URL = getenv(
     "START_IMG_URL",
-    "https://graph.org/file/7557c0e0e0c1708f62d6a-6892ea881cc1555c83.jpg"
+    "https://i.postimg.cc/sfTNHGTh/file-00000000c90481f5b5be7c1b86c63977.png"
 )
 
 PING_IMG_URL = getenv(
     "PING_IMG_URL",
-    "https://graph.org/file/f35df5dd605d76ff790b7-953db0f3e71a2e5a1a.jpg"
+    "https://i.ibb.co/twQV7yXx/2fd286ba7d7e.jpg"
 )
 
 PLAYLIST_IMG_URL = "https://te.legra.ph/file/4ec5ae4381dffb039b4ef.jpg"
