@@ -9,7 +9,7 @@ from ShrutixMusic.utils.database import get_lang, is_autoplay
 from ShrutixMusic.utils.formatters import seconds_to_min, time_to_seconds
 from strings import get_string
 
-_TAG_RE = re.compile(r"<(/?)(b|a|code)(?:\s+href=([^>]+))?>", re.IGNORECASE)
+_TAG_RE = re.compile(r"<(/?)(b|a)(?:\s+href=([^>]+))?>", re.IGNORECASE)
 
 _consumed = set()
 
@@ -41,8 +41,6 @@ def _parse_inline(segment):
             inner = inner[0] if len(inner) == 1 else inner if inner else ""
             if open_tag == "b":
                 parts.append(types.RichTextBold(text=inner))
-            elif open_tag == "code":
-                parts.append(types.RichTextCode(text=inner))
             else:
                 parts.append(types.RichTextUrl(text=inner, url=url))
 
@@ -118,7 +116,6 @@ _BUTTON_STYLES = [
 def _random_styles():
     styles = list(_BUTTON_STYLES)
     styles.append(random.choice(_BUTTON_STYLES))
-    styles.append(random.choice(_BUTTON_STYLES))
     random.shuffle(styles)
     return styles
 
@@ -140,7 +137,7 @@ def _queue_len(chat_id):
     return max(len(tracks) - 1, 0) if tracks else 0
 
 
-def _control_rows(_, chat_id, playing, styles, autoplay_on, end_style):
+def _control_rows(_, chat_id, playing, styles, autoplay_on):
     replay_style, toggle_style, skip_style, queue_style = styles
     toggle = (
         types.RichMessageButton(
@@ -180,7 +177,7 @@ def _control_rows(_, chat_id, playing, styles, autoplay_on, end_style):
                 ),
                 types.RichMessageButton(
                     text=_["RICH_BTN_END_QUEUE"],
-                    style=end_style,
+                    style=enums.ButtonStyle.DANGER,
                     callback_data=f"ADMIN Stop|{chat_id}",
                 ),
             ]
@@ -205,7 +202,7 @@ def build_now_playing_blocks(
     styles = _random_styles()
     if played and dur:
         blocks.append(_progress_row(played, dur, styles[4]))
-    blocks += _control_rows(_, chat_id, playing, styles[:4], autoplay_on, styles[5])
+    blocks += _control_rows(_, chat_id, playing, styles[:4], autoplay_on)
     return blocks
 
 
